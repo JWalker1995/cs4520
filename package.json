@@ -1,0 +1,23 @@
+{
+  "name": "cs4520_project",
+  "version": "1.0.0",
+  "description": "News manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JWalker1995/cs4520.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JWalker1995/cs4520/issues"
+  },
+  "homepage": "https://github.com/JWalker1995/cs4520#readme",
+  "dependencies": {
+    "express": "^4.14.1",
+    "pg": "^6.1.2"
+  }
+}
