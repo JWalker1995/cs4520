@@ -14,7 +14,7 @@ module.exports = function(query, callback) {
         } else if (err) {
             throw err;
         } else {
-            callback(process_result(data));
+            process_result(data);
         }
     });
 
@@ -41,7 +41,7 @@ module.exports = function(query, callback) {
                 data += chunk.toString();
             });
             res.on('end', function() {
-                callback(process_result(data));
+                process_result(data);
 
                 fs.writeFile(cache_key, data, function(err) {
                     if (err) throw err;
@@ -54,6 +54,15 @@ module.exports = function(query, callback) {
 
     let process_result = function(data) {
         let obj = JSON.parse(data);
-        return obj.items;
+        return obj.items.map(function(item) {
+            return {
+                'link': item.link,
+                'htmlTitle': item.htmlTitle,
+            }
+            let link = url.parse(item.link);
+            let domain_key = link.hostname.replace(/[^a-zA-Z0-9_]/g, '_');
+            let scraper = require('./scrapers/' + domain_key + '.js');
+            scraper()
+        });
     };
 };

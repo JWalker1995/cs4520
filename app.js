@@ -1,4 +1,5 @@
 let express = require('express');
+let bodyParser = require('body-parser');
 
 let config = require('./config');
 let search = require('./search');
@@ -6,13 +7,16 @@ let search = require('./search');
 let app = express();
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({
+    'extended': true,
+}));
 
 app.get('/', function(req, res) {
     res.send('Hello World!');
 });
 
-app.get('/search', function(req, res) {
-    search('dogs', function() {
+app.post('/search', function(req, res) {
+    search(req.body.term, function() {
     });
 });
 
