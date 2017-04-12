@@ -11,12 +11,9 @@ app.use(bodyParser.urlencoded({
     'extended': true,
 }));
 
-app.get('/', function(req, res) {
-    res.send('Hello World!');
-});
-
 app.post('/search', function(req, res) {
-    search(req.body.term, function() {
+    search(req.body.term, function(obj) {
+        res.end(JSON.stringify(obj));
     });
 });
 

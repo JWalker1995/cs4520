@@ -54,15 +54,22 @@ module.exports = function(query, callback) {
 
     let process_result = function(data) {
         let obj = JSON.parse(data);
+        callback(obj);
+        /*
         return obj.items.map(function(item) {
             return {
                 'link': item.link,
                 'htmlTitle': item.htmlTitle,
-            }
+                'htmlSnippet': item.htmlSnippet,
+                'image_urls': item.imageobject.map(function(imgobj) {return imgobj.url;}),
+            };
             let link = url.parse(item.link);
             let domain_key = link.hostname.replace(/[^a-zA-Z0-9_]/g, '_');
             let scraper = require('./scrapers/' + domain_key + '.js');
-            scraper()
+            if (typeof scraper !== 'function') {
+                scraper = require('./scrapers/default.js');
+            }
         });
+        */
     };
 };
