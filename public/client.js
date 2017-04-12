@@ -19,5 +19,5 @@ $(function() {
 });
 
 let make_item = function(item) {
-    return '<li><strong>' + item.htmlTitle + '</strong> - ' + item.htmlSnippet + '</li>';
+    return '<li><strong><a href="' + item.link + '">' + item.htmlTitle + '</a></strong> - ' + item.htmlSnippet + '</li>';
 };
