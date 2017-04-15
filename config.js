@@ -1,5 +1,6 @@
 module.exports = {
-    'http_port': 1234,
+    'http_port': process.env.PORT || 1234,
+    'http_ip': process.env.IP || 'localhost',
     'search': {
     },
     'pg': {

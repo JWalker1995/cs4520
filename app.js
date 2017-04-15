@@ -1,3 +1,4 @@
+let pg = require('pg');
 let express = require('express');
 let bodyParser = require('body-parser');
 
@@ -17,6 +18,9 @@ app.post('/search', function(req, res) {
     });
 });
 
-app.listen(config.http_port, function() {
+app.post('/save', function(req, res) {
+});
+
+app.listen(config.http_port, config.http_ip, function() {
     console.log('App listening on port ' + config.http_port);
 });
