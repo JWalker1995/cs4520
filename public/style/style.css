@@ -1,0 +1,60 @@
+.container_fluid {
+	padding: 0 !important;
+}
+.jumbotron {
+	position: relative;
+	padding: 2px !important;
+	color: #000000;
+}
+.well {
+	background-color: rgb(255, 255, 255); 
+}
+#main-div-1 {
+	margin-top:37px;   
+}
+#main-div-1 div {
+	margin-bottom: 2px; 
+}
+.modal 
+{
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	left: 0;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}				    	
+						
+/* Modal Content/Box */
+.modal-content 
+{
+	background-color: #fefefe;
+	margin: 15% auto; /* 15% from the top and centered */
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%; /* Could be more or less, depending on screen size */
+}
+#email, #passwd, #passwd1, #passwd2{ /* user input box */
+	max-width: 485px;
+}
+#signin-div, #signup-div { 
+	margin: 10% auto auto 30%; 
+}
+#signin-div button, #signup-div button {
+	width: 200px;
+}
+
+#footer-note { /* copyright all reserved */
+	color: #FFFFFF; 
+}
+.footer-top { /*for <h3> before <ul>*/
+	margin-left: 12px;  
+}
+#footer-level { /*for footer div left margin*/
+	padding-left: 0px; 
+	padding-right: 0px; 
+}
