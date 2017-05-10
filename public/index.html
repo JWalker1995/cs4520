@@ -5,132 +5,129 @@
 		    <title>Power Newser</title>
 			<meta charset="utf-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<link href="style/style.css" rel="stylesheet" type="text/css"/>
+			<link href="style/style.css" rel="stylesheet" type="text/css"/>	
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-			<script
+			<!--script
 		        src="https://code.jquery.com/jquery-3.1.1.min.js"
 		        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-		        crossorigin="anonymous"></script>
+		        crossorigin="anonymous"></script-->
 		    <script src="client.js"></script>
 	 	</head>
 	</div>
 <body>
-	<!-- div class="container-fluid" id="menu-bar"-->
-	<nav class="navbar navbar-inverse navbar-fixed-top container-fluid" id="menu-bar">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#toggleNavBar">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#"> Power Newser </a>
+	<div class="container-fluid">
+		<div class="container" id="newser-logo">
+			<h2>Power Newser</h2>
+			<p>Personalize News from Sources</p>
+		</div>
+	</div>
+	<nav class="navbar navbar-inverse container-fluid">
+		<div class="container">
+			<div>
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#toggleNavBar">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div class="collapse navbar-collapse" id="toggleNavBar">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="#"> Home </a></li>
+						<li><a href="#"> Search </a></li>
+						<li><a href="html/faq.html"> FAQ </a></li>
+						<li><a href="html/contactus.html"> Contact Us </a></li>
+						<li><a href="html/whoarewe.html"> Who We Are </a></li>
+						<li><a href="html/documentation_v3.pdf"> Documentation </a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"> Invites </a></li>
+						<li><a href="html/signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
+						<li><a href="html/signin.html"><span class="glyphicon glyphicon-log-in"></span> Sign In </a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="collapse navbar-collapse" id="toggleNavBar">
-				<ul class="nav navbar-nav">
-					<li class="active"><a href="#"> Home </a></li>
-					<li><a href="#"> Search </a></li>
-					<li><a href="html/faq.html"> FAQ </a></li>
-					<li><a href="#"> Contact Us </a></li>
-					<li><a href="#"> Who We Are </a></li>
-				</ul>
-				<!--form class="navbar-form navbar-right">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" id="search_term">
-						<div class="input-group-btn">
-							<button class="btn btn-default" id="search_button" type="submit">
-								<i class="glyphicon glyphicon-search"></i>
-							</button>
-						</div>
-					</div>
-				</form-->
-				<ul clr-right>
-					<li><a href="#"> Invites </a></li>
-					<li><a href="html/signup.html"><span class="glyphicon glyphicon-user"></span> Sign Up </a></li>
-					<li><a href="html/signin.html"><span class="glyphicon glyphicon-log-in"></span> Sign In </a></li>
-				</ul>
-			</div>
+		</div>
 	</nav>
 	<div class="container" id="main-div-1">
-		<div class="row">
+		<div class="row jumbotron">
 			<div class="col-xm-12 col-sm-12">
-				<div class="jumbotron">
-					<h4>Power Newser</h2>
-					<input class="well" id="search_term" type="text" />
-					<button class="btn btn-default btn-primary" type="submit" id="search_button">Search</button>
-					<br>
-					<ul id="news_list"></ul>
-				</div>
-			   	<div class="jumbotron">
-			   		<h4>Watch List Updates</h2>
-			   		<ul id="watchlist_updates"></ul>
+				<h4>Power Newser</h4>
+				<input class="well" id="search_term" type="text" />
+				<button class="btn btn-default btn-primary" type="submit" id="search_button">Search</button>
+				<!-- div id="search-hint">Aggregate news via keywords</div-->
+				<br>
+				<ul id="news_list"></ul>
+			</div>
+		</div>
+		<div class="row jumbotron">
+			<div class="col-xm-12 col-sm-12">
+			   	<div class="col-xm-12 col-sm-12">
+			   		<div> 
+				   		<h4>Watch List Updates</h4>
+				   		<ul id="watchlist_updates"></ul>
+				   	</div>
 			   	</div>
 			</div>
+		</div>
+		<div class="row jumbotron">
 			<div class="col-xm-12 col-sm-12">
-				<div class="jumbotron">
-					<span>User: </span><br />
-					<span>Name: </span><br />
-					<a onclick="showWatchedArticles();" style="cursor: pointer;">View Watched Articles</a></br />
-					<div id="watched_articles" class="modal">
-						<div class=modal-content style="width: 60%">
-							<h3>Watched Articles</h3>
-							<ul id="watched_article_list"></ul>
-							<button onclick = "closeWatchedArticles();">Exit</button>
-						</div>
+				<span>User: </span><br />
+				<span>Name: </span><br />
+				<a class="mag-nify" onclick="showWatchedArticles();" style="cursor: pointer;">View Watched Articles</a></br />
+				<div id="watched_articles" class="modal">
+					<div class=modal-content style="width: 60%">
+						<h3>Watched Articles</h3>
+						<ul id="watched_article_list"></ul>
+						<button onclick = "closeWatchedArticles();">Exit</button>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--div class="row">
-			<div class="col-sm-8">
-				<h2>Power Newser</h2>
-		    <div class="col-sm-4">
-				<h2>WatchList</h2>
-		    </div>
-		</div-->
 	</div>
-	<div class="container-fluid" id="footer-level">
-		<nav class="navbar navbar-inverse">
-			<div class="row">
-				<div class="col-sm-3">
-					<h3 class="footer-top" style="margin-top: 5px;"> Power Newser </h3>
-					<ul class="nav navbar-nav">
-						<li><a href="#"> Home </a></li></br>
-						<li><a href="#"> Search </a></li></br>
-						<li><a href="#"> Invites </a></li></br>
-					</ul>
-				</div>
-				<div class="col-sm-3"> 
-					<h3 class="footer-top"> Account </h3>
-					<ul class="nav navbar-nav">
-						<li><a href="html/signup.html"> Sign Up </a></li></br>
-						<li><a href="html/signin.html"> Sign In </a></li></br>
-					</ul>
-				</div>
-				<div class="col-sm-3">
-					<h3 class="footer-top"> Support </h3>
-					<ul class="nav navbar-nav">
-						<li><a href="#"> Contact Us </a></li></br>
-						<li><a href="#"> Who We Are </a></li></br>
-						<li><a href="#"> FAQ </a></li></br>
-					</ul>
-					
-				</div>
-				<div class="col-sm-3">
-					<h3 class="footer-top"> Social Media </h3>
-					<ul class="nav navbar-nav">
-						<li><a href="#"><img src="images/facebook.svg" alt="facebook" id="facebook"></img> Facebook </a></li></br>
-						<li><a href="#"><img src="images/twitter.svg" alt="twitter" id="twitter"></img> Twitter </a></li></br>
-						<li><a href="#"><img src="images/instagram.svg" alt="instagram" id="instagram"></img> Instagram </a></li></br>
-						<li><a href="#"><img src="images/google-plus.svg" alt="google plus" id="googleplus"></img> Google+ </a></li></br>
-					</ul>
-				</div>
+	<nav class="navbar navbar-inverse container-fluid">  
+		<div class="container">  
+		<div class="row">
+			<div class=" col-xm-12 col-sm-3">
+				<h3 class="footer-top"> Power Newser </h3>
+				<ul class="nav navbar-nav">
+					<li><a href="#"> Home </a></li></br>
+					<li><a href="#"> Search </a></li></br>
+					<li><a href="#"> Invites </a></li></br>
+				</ul>
 			</div>
-				<p id="footer-note">
-					<span class="glyphicon glyphicon-copyright-mark">2017</span> Power Newser. News scrapped from different sources. All Rights Reserved.<a href="services/terms.html" rel="nofollow"> Terms </a> and <a href="services/privacy/">Privacy Policy</a> under which users are bound to abide by.
-				</p>
-		</nav>
-	</div>
+			<div class="col-xm-12 col-sm-3"> 
+				<h3 class="footer-top"> Account </h3>
+				<ul class="nav navbar-nav">
+					<li><a href="html/signup.html"> Sign Up </a></li></br>
+					<li><a href="html/signin.html"> Sign In </a></li></br>
+				</ul>
+			</div>
+			<div class="col-xm-12 col-sm-3">
+				<h3 class="footer-top"> Support </h3>
+				<ul class="nav navbar-nav">
+					<li><a href="#"> Contact Us </a></li></br>
+					<li><a href="#"> Who We Are </a></li></br>
+					<li><a href="#"> FAQ </a></li></br>
+				</ul>
+				
+			</div>
+			<div class="col-xm-12 col-sm-3">
+				<h3 class="footer-top"> Social Media </h3>
+				<ul class="nav navbar-nav">
+					<li><a href="#"><img src="images/facebook.svg" alt="facebook" id="facebook"></img> Facebook </a></li></br>
+					<li><a href="#"><img src="images/twitter.svg" alt="twitter" id="twitter"></img> Twitter </a></li></br>
+					<li><a href="#"><img src="images/instagram.svg" alt="instagram" id="instagram"></img> Instagram </a></li></br>
+					<li><a href="#"><img src="images/google-plus.svg" alt="google plus" id="googleplus"></img> Google+ </a></li></br>
+				</ul>
+			</div>
+		</div>
+		<p id="footer-note">
+			<span class="glyphicon glyphicon-copyright-mark">2017</span> Power Newser. News scraped from different sources. All Rights Reserved.<a href="services/terms.html" rel="nofollow"> Terms </a> and <a href="services/privacy/">Privacy Policy</a> under which users are bound to abide by.
+		</p>
+		</div>
+	</nav>
 </body>
 </html>

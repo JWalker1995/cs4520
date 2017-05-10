@@ -8,7 +8,7 @@ let db = require('./db');
 let config = require('./config');
 
 module.exports = function (link, title, articledesc, emailaddress, firstname, lastname, isPhoneMessage, callback) {
-        var subject = firstname + ' ' + lastname + 'has shared an article with you!';
+        var subject = firstname + ' ' + lastname + ' has shared an article with you!';
         var textContent = firstname + ' ' + lastname + 'has shared an article with you:\n';
         var htmlContent = textContent;
         
@@ -19,6 +19,8 @@ module.exports = function (link, title, articledesc, emailaddress, firstname, la
         var message;
         if (isPhoneMessage)
         {
+            textContent = 'Link: ' + link;
+            
             message = {
                 from: 'no-reply@powernewser.com',
                 to: emailaddress,
@@ -29,6 +31,9 @@ module.exports = function (link, title, articledesc, emailaddress, firstname, la
         }
         else 
         {
+            textContent += ' Title: ' + title + '\n' + 'Link: ' + link;
+            htmlContent += '<a href="' + link + '">' + title + '</a>';
+        
             message = {
                 from: 'no-reply@powernewser.com',
                 to: emailaddress,

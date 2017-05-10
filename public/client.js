@@ -1,3 +1,12 @@
+function escapeHtml(str) {
+    return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 $(function() {
     let $search_term = $('#search_term');
     let $news_list = $('#news_list');
@@ -20,10 +29,40 @@ $(function() {
     });
 });
 
+let update_watchlist = function () {
+    let watchlist = $('#watchlist_updates');
+    let watchedArticles = $('#watched_article_list');
+    $.ajax({
+        'method': 'POST',
+        'url': '/viewWatchlistUpdate',
+        'dataType': 'json',
+    }).done(function(obj) {
+        watchlist.empty();
+        obj.forEach(function(item) {
+            watchlist.append(make_watchlist_item(item));
+        });
+    });
+    
+    $.ajax({
+        'method' : 'POST',
+        'url' : '/getWatchedArticles',
+        'dataType' : 'json'
+    }).done(function(obj) {
+        watchedArticles.empty();
+        obj.forEach(function(item) {
+            watchedArticles.append(make_watched_articles_item(item));
+        });
+    });
+};
+
 let make_item = function(item, number) {
-    return '<li><a href="#" onclick="saveToWatchlist(\'' + item.link + '\', \'' + $('#search_term').val() +'\', \'' + item.htmlSnippet.replace('\n', '') + '\', \'' + item.htmlTitle.replace('\n', '') 
-        + '\');">Save to watchlist</a><br /><strong><a href="' + item.link + '">' + item.htmlTitle + '</a></strong> - ' + item.htmlSnippet 
-        + '<br /><a href="#" onclick="sendEmail(\'' + item.link + '\', \'' + item.htmlTitle.replace('\n', '') + '\', \'' + item.htmlSnippet.replace('\n', '') + '\', $(\'#textfield_' + number + '\').val());">Shared via email</a> <input type="text" id="textfield_' + number +'" />' + '<br /></li>';
+    let save_code = 'saveToWatchlist(' + JSON.stringify(item.link) + ', ' + JSON.stringify($('#search_term').val()) + ', ' + JSON.stringify(item.htmlSnippet) + ', ' + JSON.stringify(item.htmlTitle) + ')';
+    let email_code = 'sendEmail(' + JSON.stringify(item.link) + ', ' + JSON.stringify(item.htmlTitle) + ', ' + JSON.stringify(item.htmlSnippet) + ', $(\'#textfield_' + number + '\').val()))';
+    let sms_code = 'sendSMS(' + JSON.stringify(item.link) + ', ' + JSON.stringify(item.htmlTitle) + ', ' + JSON.stringify(item.htmlSnippet) + ', $(\'#textfield_' + number + '\').val()))';
+    
+    return '<li><a href="#" onclick="' + escapeHtml(save_code) + '">Save to watchlist</a><br /><strong><a href="' + item.link + '">' + item.htmlTitle + '</a></strong> - ' + item.htmlSnippet 
+        + '<br /><a href="#" onclick="' + escapeHtml(email_code) + '">Share via email</a> <input type="text" id="textfield_' + number +'" />' + '<br />' 
+        + '<br /><a href="#" onclick="' + escapeHtml(sms_code) + '">Share via Text</a><br /></li>';
 };
 
 function sendEmail(link, title, articledesc, emailaddress) {
@@ -39,11 +78,20 @@ function sendEmail(link, title, articledesc, emailaddress) {
     });
 }
 
+function sendSMS(link, title, articledesc, phonenumber) {
+    $.ajax({
+        'method' : 'POST',
+        'url' : '/sendSMS',
+        'data' : {
+            'link' : link,
+            'title' : title,
+            'articledesc' : articledesc,
+            'emailaddress' : phonenumber
+        }
+    });
+}
+
 function saveToWatchlist(url, keyword, articleDesc,  title) {
-    console.log(url);
-    console.log(keyword);
-    console.log(articleDesc);
-    console.log(title);
     $.ajax({
             'method': 'POST',
             'url': '/saveToWatchlist',
@@ -53,7 +101,7 @@ function saveToWatchlist(url, keyword, articleDesc,  title) {
                 'articledesc' : articleDesc,
                 'title' : title
             }
-        }).done(function(obj) {});
+        }).done(update_watchlist);
 }
 
 function deleteFromWatchlist(watchedarticleid) {
@@ -63,7 +111,7 @@ function deleteFromWatchlist(watchedarticleid) {
             'data' : {
                 'watchedarticleid' : watchedarticleid
             }
-        }).done(function(obj) {});
+        }).done(update_watchlist);
 }
 
 let make_watchlist_item = function(item) {
@@ -71,7 +119,6 @@ let make_watchlist_item = function(item) {
 };
 
 let make_watched_articles_item = function(item) {
-    //console.log('<li><a href="#">Remove from watchlist</a><br />Keywords used for search: ' + item.searchkeyword + '<br />' + '<a href="' + item.link + '">' + item.title + '</a>'  + item.articledesc + '</li>');
     return '<li><a href="#" onclick="deleteFromWatchlist(' + item.watchedarticleid + ');">Remove from watchlist</a><br />Keywords used for search: ' + item.searchkeyword + '<br />' + '<a href="' + item.link + '">' + item.title + '</a> Description:&nbsp;'  + item.articledesc + '</li>';  
 };
 
@@ -87,31 +134,4 @@ let closeWatchedArticles = function() {
     modal.style.display = "none";
 }
 
-$(document).ready(function () {
-    let watchlist = $('#watchlist_updates');
-    let watchedArticles = $('#watched_article_list');
-    $.ajax({
-            'method': 'POST',
-            'url': '/viewWatchlistUpdate',
-            'dataType': 'json',
-        }).done(function(obj) {
-            watchlist.empty();
-            obj.forEach(function(item) {
-                watchlist.append(make_watchlist_item(item));
-            });
-        });
-        
-    $.ajax({
-        'method' : 'POST',
-        'url' : '/getWatchedArticles',
-        'dataType' : 'json'
-    }).done(function(obj) {
-        console.log(watchedArticles);
-        watchedArticles.empty();
-        obj.forEach(function(item) {
-            watchedArticles.append(make_watched_articles_item(item));
-        });
-    });
-});
-
-
+$(document).ready(update_watchlist);

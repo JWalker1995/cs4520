@@ -10,6 +10,8 @@ let getWatchedArticles = require('./getWatchedArticles');
 let saveToWatchlist = require('./saveToWatchlist');
 let deleteFromWatchlist = require('./deleteFromWatchlist');
 let sendEmail = require('./sendEmail');
+let sendSMS = require('./sendSMS');
+let cleanCache = require('./cleanCache');
 let app = express();
 
 app.use(express.static('public'));
@@ -33,13 +35,14 @@ app.use(function(request, reply, next) {
 
 app.post('/search', function(request, reply) {
     search(request.body.term, function(obj) {
+        console.log(obj);
         reply.end(JSON.stringify(obj));
     });
 });
 
 app.post('/saveToWatchlist', function(request, reply) {
     saveToWatchlist(request.body.link, request.body.articledesc, request.body.title, request.body.searchkeyword, 1, function(obj) {
-        reply.end();
+        reply.end('');
     });
 });
 
@@ -56,11 +59,15 @@ app.post('/getWatchedArticles', function(request, reply) {
 });
 
 app.post('/deleteFromWatchlist', function (request, reply) {
-    deleteFromWatchlist(request.body.watchedarticleid, function (obj) { });
+    deleteFromWatchlist(request.body.watchedarticleid, function (obj) {reply.end('')});
 });
 
 app.post('/sendEmail', function(request, reply) {
-    sendEmail(request.body.link, request.body.title, request.body.articledesc, request.body.emailaddress, 'Test1', 'Test1', false, function () {reply.end()});
+    sendEmail(request.body.link, request.body.title, request.body.articledesc, request.body.emailaddress, 'Test1', 'Test1', false, function () {reply.end('')});
+});
+
+app.post('/sendSMS', function (request, reply) {
+    sendSMS(request.body.link, request.body.title, request.body.articledesc, request.body.emailaddress, 'Test1', 'Test1', function () {reply.end('')});
 });
 
 app.post('/save', function(request, reply) {
@@ -82,3 +89,6 @@ app.post('/save', function(request, reply) {
 app.listen(config.http_port, config.http_ip, function() {
     console.log('App listening on port ' + config.http_port);
 });
+
+cleanCache();
+setInterval(cleanCache, 60000);

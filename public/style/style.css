@@ -1,20 +1,93 @@
-.container_fluid {
-	padding: 0 !important;
+html, body, .container-fluid, .container {
+	margin: 0px;
+	padding: 0px; 
 }
-.jumbotron {
-	position: relative;
-	padding: 2px !important;
-	color: #000000;
+nav, #newser-logo h2, #newser-logo p {
+	margin: 0px; 
+	font-weight: bold; 
+	font-variant: small-caps; 
 }
-.well {
-	background-color: rgb(255, 255, 255); 
+nav {
+	font-family: Verdana, "Lucida Console", Georgia;
+	color: rgb(192,192,192);
+	font-size: 1.2em;
+}
+#newser-logo h2 {
+	font-family: "Lucida Console", Georgia, Verdana;
+	color: rgb(100, 104, 109);
+	font-size: 2.5em;
+}
+#newser-logo p {
+	font: Georgia, Verdana, "Lucida Console"; 
+	color: rgb(5, 41, 89); 
+	font-size: 1.8em;
+}
+.row .jumbotron {
+	margin-bottom: 2em; 
+	padding: 0px; 
+}
+.row .jumbotron div {
+	margin: 2em 2em; 
+	padding: 0.1em 0.1em; 
 }
 #main-div-1 {
-	margin-top:37px;   
+	margin-top: 2em; 
 }
-#main-div-1 div {
-	margin-bottom: 2px; 
+/* #search_term {
+	border-radius: 0.7em;
+	border: 1px solid #2d061a;
 }
+input[type=text] {
+	width: 10em;
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+	width: 25em;
+}
+#search_button {
+	border-radius: 0.7em;
+}
+#search-hint {
+	background-color: green;
+	color: yellow;
+	border-radius: 0.7em; 
+	margin-left: 12em; 
+	padding: 0.6em;
+	text-align: center; 
+	display: none;
+}
+#search_button:hover + #search-hint {
+	display: block; 
+	width: 16.4em;
+}
+a.mono-space:hover, a.mono-space:active {
+	font-family: monospace; 
+	text-decoration: none; 
+} 
+a.mag-nify:hover, a.mag-nify:active {
+	font-size: 150%;
+	text-decoration: none; 
+} 
+a {
+	text-decoration: none; 
+}
+a:active, a:hover {
+	font-size: 150%;
+	text-decoration: none; 
+}
+a:link {
+	color: green;
+}
+a:visited {
+	color: red; 
+}
+a:hover {
+	color: yellow; 
+}
+li {
+	text-align: justify; 
+} */
 .modal 
 {
 	display: none; /* Hidden by default */
@@ -38,23 +111,19 @@
 	border: 1px solid #888;
 	width: 80%; /* Could be more or less, depending on screen size */
 }
+#footer-note { /* copyright all reserved */
+	padding-left: 0.3em;
+}
+.footer-top { /*for <h3> before <ul>*/
+	margin-left: 0.5em;  
+}
+
 #email, #passwd, #passwd1, #passwd2{ /* user input box */
-	max-width: 485px;
+	max-width: 30.3em;
 }
 #signin-div, #signup-div { 
 	margin: 10% auto auto 30%; 
 }
 #signin-div button, #signup-div button {
-	width: 200px;
-}
-
-#footer-note { /* copyright all reserved */
-	color: #FFFFFF; 
-}
-.footer-top { /*for <h3> before <ul>*/
-	margin-left: 12px;  
-}
-#footer-level { /*for footer div left margin*/
-	padding-left: 0px; 
-	padding-right: 0px; 
+	width: 12.5em;
 }

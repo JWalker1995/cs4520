@@ -10,5 +10,6 @@ let config = require('./config');
 module.exports = function (watchedArticleID, callback) {
     db.query('DELETE FROM watchedarticle WHERE watchedarticleid = $1::int', [watchedArticleID], function (err, res) {
         if (err) console.log(err);
+        callback();
     });
 };
